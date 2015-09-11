@@ -56,50 +56,41 @@ class PlaySoundsViewController: UIViewController {
         audioPlayer.play();
     }
     
+    func playWithEffect(effectNode: AVAudioNode) {
+        // Setup audioEngine with effect
+        var audioPlayerNode = AVAudioPlayerNode();
+        audioEngine.attachNode(audioPlayerNode);
+        audioEngine.attachNode(effectNode);
+        audioEngine.connect(audioPlayerNode, to: effectNode, format: nil);
+        audioEngine.connect(effectNode, to: audioEngine.outputNode, format: nil);
+        audioPlayerNode.scheduleFile(audioFile, atTime: nil, completionHandler: nil);
+        audioEngine.startAndReturnError(nil);
+        
+        audioPlayerNode.play();
+    }
+    
     func playAtPitch(pitch: Float) {
         stopAudio();
         
-        // Setup audioEngine to playback pitch-altered audio
-        let audioPlayerNode = AVAudioPlayerNode();
-        let audioUnitTimePitch = AVAudioUnitTimePitch();
+        // Playback pitch-altered audio
+        var audioUnitTimePitch = AVAudioUnitTimePitch();
         audioUnitTimePitch.pitch = pitch;
-        
-        audioEngine.attachNode(audioPlayerNode);
-        audioEngine.attachNode(audioUnitTimePitch);
-        
-        audioEngine.connect(audioPlayerNode, to: audioUnitTimePitch, format: nil);
-        audioEngine.connect(audioUnitTimePitch, to: audioEngine.outputNode, format: nil);
-        
-        audioPlayerNode.scheduleFile(audioFile, atTime: nil, completionHandler: nil);
-        audioEngine.startAndReturnError(nil);
-        audioPlayerNode.play();
+        playWithEffect(audioUnitTimePitch);
     }
     
-    func playbackWithReverb(wetDryMix: Float, roomSetting: AVAudioUnitReverbPreset)
-    {
+    func playbackWithReverb(wetDryMix: Float, roomSetting: AVAudioUnitReverbPreset) {
         stopAudio();
         
-        // Setup audioEngine to playback reverb-modulated audio
-        let audioPlayerNode = AVAudioPlayerNode();
-        let audioUnitReverb = AVAudioUnitReverb();
+        // Playback reverb-modulated audio
+        var audioUnitReverb = AVAudioUnitReverb();
         audioUnitReverb.wetDryMix = wetDryMix;
         audioUnitReverb.loadFactoryPreset(roomSetting);
-        
-        audioEngine.attachNode(audioPlayerNode);
-        audioEngine.attachNode(audioUnitReverb);
-        
-        audioEngine.connect(audioPlayerNode, to: audioUnitReverb, format: nil);
-        audioEngine.connect(audioUnitReverb, to: audioEngine.outputNode, format: nil);
-        
-        audioPlayerNode.scheduleFile(audioFile, atTime: nil, completionHandler: nil);
-        audioEngine.startAndReturnError(nil);
-        audioPlayerNode.play();
+        playWithEffect(audioUnitReverb);
     }
     
-    func stopAudio()
-    {
+    func stopAudio() {
         audioPlayer.stop();
-        audioPlayer.currentTime = 0;
+        audioPlayer.currentTime = 0.0;
         audioEngine.stop();
         audioEngine.reset();
     }
