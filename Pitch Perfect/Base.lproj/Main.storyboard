@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="5EH-Ya-C8G">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="5EH-Ya-C8G">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -119,8 +120,12 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mRJ-C8-5Tg">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="120" id="19O-CL-k8j"/>
-                                    <constraint firstAttribute="width" constant="120" id="PbZ-wo-3JL"/>
+                                    <constraint firstAttribute="height" constant="120" id="19O-CL-k8j">
+                                        <variation key="widthClass=compact" constant="100"/>
+                                    </constraint>
+                                    <constraint firstAttribute="width" constant="120" id="PbZ-wo-3JL">
+                                        <variation key="widthClass=compact" constant="100"/>
+                                    </constraint>
                                 </constraints>
                                 <state key="normal" image="Fast">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -147,8 +152,12 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OB2-c2-t3P">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="120" id="1V2-SS-5Aj"/>
-                                    <constraint firstAttribute="height" constant="120" id="IaK-bm-wQJ"/>
+                                    <constraint firstAttribute="width" constant="120" id="1V2-SS-5Aj">
+                                        <variation key="widthClass=compact" constant="100"/>
+                                    </constraint>
+                                    <constraint firstAttribute="height" constant="120" id="IaK-bm-wQJ">
+                                        <variation key="widthClass=compact" constant="100"/>
+                                    </constraint>
                                 </constraints>
                                 <state key="normal" image="PitchDown">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -187,8 +196,12 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U4p-fE-XHt">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="120" id="Shf-uQ-gZK"/>
-                                    <constraint firstAttribute="width" constant="120" id="SrL-vC-cEF"/>
+                                    <constraint firstAttribute="height" constant="120" id="Shf-uQ-gZK">
+                                        <variation key="widthClass=compact" constant="100"/>
+                                    </constraint>
+                                    <constraint firstAttribute="width" constant="120" id="SrL-vC-cEF">
+                                        <variation key="widthClass=compact" constant="100"/>
+                                    </constraint>
                                 </constraints>
                                 <state key="normal" image="PitchUp">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -212,36 +225,15 @@
                                     <action selector="playbackPitchUp:" destination="HfI-XC-K4T" eventType="touchUpInside" id="3p2-9g-DdB"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a1t-D6-fJn">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="120" id="Awb-qx-6CG"/>
-                                    <constraint firstAttribute="width" constant="120" id="Mwt-8X-R6I"/>
-                                </constraints>
-                                <state key="normal" image="Reverb">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="Awb-qx-6CG"/>
-                                        <exclude reference="Mwt-8X-R6I"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="Awb-qx-6CG"/>
-                                        <include reference="Mwt-8X-R6I"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <action selector="playbackReverb:" destination="HfI-XC-K4T" eventType="touchUpInside" id="NDV-k4-8uI"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="78W-rv-Ddw">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="120" id="3ow-oA-mEo"/>
-                                    <constraint firstAttribute="height" constant="120" id="otJ-yd-XTO"/>
+                                    <constraint firstAttribute="width" constant="120" id="3ow-oA-mEo">
+                                        <variation key="widthClass=compact" constant="100"/>
+                                    </constraint>
+                                    <constraint firstAttribute="height" constant="120" id="otJ-yd-XTO">
+                                        <variation key="widthClass=compact" constant="100"/>
+                                    </constraint>
                                 </constraints>
                                 <state key="normal" image="Slow">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -265,6 +257,36 @@
                                     <action selector="playbackSlow:" destination="HfI-XC-K4T" eventType="touchUpInside" id="C65-rC-RHy"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a1t-D6-fJn">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="Awb-qx-6CG">
+                                        <variation key="widthClass=compact" constant="100"/>
+                                    </constraint>
+                                    <constraint firstAttribute="width" constant="120" id="Mwt-8X-R6I">
+                                        <variation key="widthClass=compact" constant="100"/>
+                                    </constraint>
+                                </constraints>
+                                <state key="normal" image="Reverb">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Awb-qx-6CG"/>
+                                        <exclude reference="Mwt-8X-R6I"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="288" width="100" height="100"/>
+                                    <mask key="constraints">
+                                        <include reference="Awb-qx-6CG"/>
+                                        <include reference="Mwt-8X-R6I"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="playbackReverb:" destination="HfI-XC-K4T" eventType="touchUpInside" id="NDV-k4-8uI"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -280,6 +302,7 @@
                             <constraint firstItem="OB2-c2-t3P" firstAttribute="centerY" secondItem="U4p-fE-XHt" secondAttribute="centerY" id="krl-Dv-RGY"/>
                             <constraint firstAttribute="centerX" secondItem="a1t-D6-fJn" secondAttribute="centerX" id="oCD-Eu-nzd"/>
                             <constraint firstItem="78W-rv-Ddw" firstAttribute="top" secondItem="s2c-qk-vY5" secondAttribute="bottom" constant="8" id="ptO-lW-DcR"/>
+                            <constraint firstItem="a1t-D6-fJn" firstAttribute="centerX" secondItem="U4p-fE-XHt" secondAttribute="centerX" id="zYR-KJ-UZ9"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
@@ -287,22 +310,23 @@
                                 <exclude reference="OB2-c2-t3P"/>
                                 <exclude reference="7Ph-9a-5bk"/>
                                 <exclude reference="U4p-fE-XHt"/>
-                                <exclude reference="a1t-D6-fJn"/>
                                 <exclude reference="78W-rv-Ddw"/>
+                                <exclude reference="a1t-D6-fJn"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="Zx3-2T-Ktj"/>
                                 <exclude reference="7FI-Me-nUP"/>
                                 <exclude reference="LNS-Kj-9d4"/>
                                 <exclude reference="kcG-dQ-HbS"/>
                                 <exclude reference="ptO-lW-DcR"/>
-                                <exclude reference="7bF-3l-VO9"/>
-                                <exclude reference="aDo-qj-uyT"/>
-                                <exclude reference="krl-Dv-RGY"/>
                                 <exclude reference="hz7-zO-hNF"/>
                                 <exclude reference="WBi-Uq-TqE"/>
                                 <exclude reference="oCD-Eu-nzd"/>
+                                <exclude reference="zYR-KJ-UZ9"/>
                                 <exclude reference="WFH-Pb-y62"/>
+                                <exclude reference="aDo-qj-uyT"/>
+                                <exclude reference="krl-Dv-RGY"/>
+                                <exclude reference="7bF-3l-VO9"/>
+                                <exclude reference="Zx3-2T-Ktj"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -311,22 +335,23 @@
                                 <include reference="OB2-c2-t3P"/>
                                 <include reference="7Ph-9a-5bk"/>
                                 <include reference="U4p-fE-XHt"/>
-                                <include reference="a1t-D6-fJn"/>
                                 <include reference="78W-rv-Ddw"/>
+                                <include reference="a1t-D6-fJn"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="Zx3-2T-Ktj"/>
                                 <include reference="7FI-Me-nUP"/>
                                 <include reference="LNS-Kj-9d4"/>
                                 <include reference="kcG-dQ-HbS"/>
                                 <include reference="ptO-lW-DcR"/>
-                                <include reference="7bF-3l-VO9"/>
-                                <include reference="aDo-qj-uyT"/>
-                                <include reference="krl-Dv-RGY"/>
                                 <include reference="hz7-zO-hNF"/>
                                 <include reference="WBi-Uq-TqE"/>
-                                <include reference="oCD-Eu-nzd"/>
+                                <exclude reference="oCD-Eu-nzd"/>
+                                <include reference="zYR-KJ-UZ9"/>
                                 <include reference="WFH-Pb-y62"/>
+                                <include reference="aDo-qj-uyT"/>
+                                <include reference="krl-Dv-RGY"/>
+                                <include reference="7bF-3l-VO9"/>
+                                <include reference="Zx3-2T-Ktj"/>
                             </mask>
                         </variation>
                     </view>

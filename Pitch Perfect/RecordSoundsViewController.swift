@@ -32,7 +32,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    func audioRecorderDidFinishRecording(recorder: AVAudioRecorder!, successfully flag: Bool) {
+    func audioRecorderDidFinishRecording(recorder: AVAudioRecorder, successfully flag: Bool) {
         if(flag)
         {
             // Store information for next ViewController
@@ -41,7 +41,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         }
         else
         {
-            println("WARNING: Failed to record");
+            print("WARNING: Failed to record");
         }
     }
     
@@ -66,7 +66,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
             recordingLabel.textColor = UIColor.redColor();
             
             // Setup recorder filepaths
-            let dirPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String;
+            let dirPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0];
             let pathArray:AnyObject;
             
             if(usePresetFilename) // Use preset filename
@@ -81,21 +81,27 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
                 var recordingName = formatter.stringFromDate(currentDateTime) + ".wav";
                 pathArray = [dirPath, recordingName];
             }
-            var recordingPath = NSURL.fileURLWithPathComponents(pathArray as! [AnyObject]);
+            var recordingPath = NSURL.fileURLWithPathComponents(pathArray as! [String]);
             
-            println("INFO: RecordingPath = \(recordingPath!)");
+            print("INFO: RecordingPath = \(recordingPath!)");
             
             // Setup & run recorder
             let session = AVAudioSession.sharedInstance();
-            session.setCategory(AVAudioSessionCategoryPlayAndRecord, error: nil);
+            do
+            {
+                try session.setCategory(AVAudioSessionCategoryPlayAndRecord);
+            }
+            catch _
+            {
+            }
             
-            audioRecorder = AVAudioRecorder(URL: recordingPath, settings: nil, error: nil);
+            audioRecorder = try? AVAudioRecorder(URL: recordingPath!, settings: [:]);
             audioRecorder.delegate = self;
             audioRecorder.meteringEnabled = true;
             audioRecorder.prepareToRecord();
             audioRecorder.record();
             
-            println("INFO: Recording started");
+            print("INFO: Recording started");
         }
         else if(!isPaused) // Pause recording
         {
@@ -104,7 +110,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
             recordingLabel.textColor = appColorBlue;
             
             audioRecorder.pause();
-            println("INFO: Recording paused");
+            print("INFO: Recording paused");
         }
         else // Unpause recording
         {
@@ -113,10 +119,10 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
             recordingLabel.textColor = UIColor.redColor();
             
             audioRecorder.record();
-            println("INFO: Recording unpaused");
+            print("INFO: Recording unpaused");
         }
         
-        println("INFO: recordAudio pressed");
+        print("INFO: recordAudio pressed");
     }
     
     @IBAction func stopRecording(sender: UIButton) {
@@ -128,8 +134,14 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         
         audioRecorder.stop();
         let audioSession = AVAudioSession.sharedInstance();
-        audioSession.setActive(false, error: nil);
+        do
+        {
+            try audioSession.setActive(false);
+        }
+        catch _
+        {
+        }
         
-        println("INFO: stopRecording pressed");
+        print("INFO: stopRecording pressed");
     }
 }

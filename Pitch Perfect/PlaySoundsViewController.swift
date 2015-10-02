@@ -23,22 +23,22 @@ class PlaySoundsViewController: UIViewController {
         
         if(useRecorder) // Use recorder
         {
-            audioPlayer = AVAudioPlayer(contentsOfURL: receivedAudio.filePathUrl, error: nil);
+            audioPlayer = try? AVAudioPlayer(contentsOfURL: receivedAudio.filePathUrl);
             audioPlayer.enableRate = true;
-            audioFile = AVAudioFile(forReading: receivedAudio.filePathUrl, error: nil)
+            audioFile = try? AVAudioFile(forReading: receivedAudio.filePathUrl);
         }
         else // Use preset file
         {
             if let audioFilePath = NSBundle.mainBundle().pathForResource("movie_quote", ofType: "mp3")
             {
                 let audioFilePathURL = NSURL.fileURLWithPath(audioFilePath);
-                audioPlayer = AVAudioPlayer(contentsOfURL: audioFilePathURL, error: nil);
+                audioPlayer = try? AVAudioPlayer(contentsOfURL: audioFilePathURL);
                 audioPlayer.enableRate = true;
-                audioFile = AVAudioFile(forReading: audioFilePathURL, error: nil)
+                audioFile = try? AVAudioFile(forReading: audioFilePathURL);
             }
             else
             {
-                println("WARNING: audioFilePath is empty");
+                print("WARNING: audioFilePath is empty");
             }
         }
         
@@ -46,7 +46,7 @@ class PlaySoundsViewController: UIViewController {
     }
 
     override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+        super.didReceiveMemoryWarning();
         // Dispose of any resources that can be recreated.
     }
 
@@ -64,7 +64,13 @@ class PlaySoundsViewController: UIViewController {
         audioEngine.connect(audioPlayerNode, to: effectNode, format: nil);
         audioEngine.connect(effectNode, to: audioEngine.outputNode, format: nil);
         audioPlayerNode.scheduleFile(audioFile, atTime: nil, completionHandler: nil);
-        audioEngine.startAndReturnError(nil);
+        do
+        {
+            try audioEngine.start()
+        }
+        catch _
+        {
+        }
         
         audioPlayerNode.play();
     }
@@ -73,7 +79,7 @@ class PlaySoundsViewController: UIViewController {
         stopAudio();
         
         // Playback pitch-altered audio
-        var audioUnitTimePitch = AVAudioUnitTimePitch();
+        let audioUnitTimePitch = AVAudioUnitTimePitch();
         audioUnitTimePitch.pitch = pitch;
         playWithEffect(audioUnitTimePitch);
     }
@@ -82,7 +88,7 @@ class PlaySoundsViewController: UIViewController {
         stopAudio();
         
         // Playback reverb-modulated audio
-        var audioUnitReverb = AVAudioUnitReverb();
+        let audioUnitReverb = AVAudioUnitReverb();
         audioUnitReverb.wetDryMix = wetDryMix;
         audioUnitReverb.loadFactoryPreset(roomSetting);
         playWithEffect(audioUnitReverb);
@@ -97,31 +103,31 @@ class PlaySoundsViewController: UIViewController {
     
     @IBAction func playbackSlow(sender: UIButton) {
         playAtRate(0.5);
-        println("INFO: playbackSlow pressed");
+        print("INFO: playbackSlow pressed");
     }
     
     @IBAction func playbackFast(sender: UIButton) {
         playAtRate(2.0);
-        println("INFO: playbackFast pressed");
+        print("INFO: playbackFast pressed");
     }
     
     @IBAction func playbackPitchUp(sender: UIButton) {
         playAtPitch(1200);
-        println("INFO: playbackPitchUp pressed");
+        print("INFO: playbackPitchUp pressed");
     }
     
     @IBAction func playbackPitchDown(sender: UIButton) {
         playAtPitch(-600);
-        println("INFO: playbackPitchDown pressed");
+        print("INFO: playbackPitchDown pressed");
     }
     
     @IBAction func playbackReverb(sender: UIButton) {
         playbackWithReverb(50, roomSetting: AVAudioUnitReverbPreset.Cathedral);
-        println("INFO: playbackReverb pressed");
+        print("INFO: playbackReverb pressed");
     }
     
     @IBAction func playbackStop(sender: UIButton) {
         stopAudio();
-        println("INFO: playbackStop pressed");
+        print("INFO: playbackStop pressed");
     }
 }
